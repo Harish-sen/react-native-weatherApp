@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { API_KEY } from '../config';
 
 // Thunk to fetch weather data based on city
 export const fetchWeather = createAsyncThunk(
   'weather/fetchWeather',
   async (cityName) => {
-    const API_KEY = '08a534bd755944bd878163042251903'; // Your WeatherAPI Key
     console.log(cityName, 'cityname');
     const response = await axios.get(
       `http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${cityName}`
@@ -19,7 +19,6 @@ export const fetchWeather = createAsyncThunk(
 export const fetchForecast = createAsyncThunk(
   'weather/fetchForecast',
   async ({ city, days }) => {
-    const API_KEY = '08a534bd755944bd878163042251903'; // Your WeatherAPI Key
     const response = await axios.get(
       `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=${days}`
     );
@@ -38,7 +37,6 @@ const weatherSlice = createSlice({
   },
   reducers: {},
   extraReducers: (builder) => {
-    // Handle weather data
     builder
       .addCase(fetchWeather.pending, (state) => {
         state.status = 'loading';
@@ -53,7 +51,6 @@ const weatherSlice = createSlice({
         state.error = action.error.message;
       });
     
-    // Handle forecast data
     builder
       .addCase(fetchForecast.pending, (state) => {
         state.status = 'loading';

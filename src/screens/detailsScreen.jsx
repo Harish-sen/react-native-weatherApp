@@ -8,7 +8,6 @@ import ConnectivityAlert from '../components/comman/network';
 
 const { width } = Dimensions.get('window');
 
-// Helper function to format the date
 const formatDate = (dateString) => {
   const date = new Date(dateString);
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -28,29 +27,25 @@ const DetailsScreen = () => {
     );
   }
 
-  const { day, astro, date } = forecastDetails; // Assuming forecastDetails contains a 'date' field
+  const { day, astro, date } = forecastDetails;
 
   return (
     <LinearGradient colors={['#4facfe', '#00c6ff']} style={styles.gradient}>
         <ConnectivityAlert/>
       <ScrollView style={styles.container}  showsVerticalScrollIndicator={false} >
-        {/* Top section with city name, date, temperature, and Lottie animation */}
         <View style={styles.topContainer}>
-          {/* Left: Temperature, city, date, and condition */}
           <View style={styles.temperatureContainer}>
             <Text style={styles.cityName}>{cityName}</Text>
-            <Text style={styles.dateText}>{formatDate(date)}</Text> {/* Display formatted date */}
+            <Text style={styles.dateText}>{formatDate(date)}</Text>
             <Text style={styles.currentTemp}>{Math.round((day.maxtemp_c + day.mintemp_c) / 2)}°C</Text>
             <Text style={styles.conditionText}>{day.condition.text}</Text>
 
-            {/* High and low temperatures */}
             <View style={styles.tempRangeContainer}>
               <Text style={styles.tempRange}>High: {day.maxtemp_c}°C</Text>
               <Text style={styles.tempRange}>Low: {day.mintemp_c}°C</Text>
             </View>
           </View>
 
-          {/* Right: Lottie Animation */}
           <View style={styles.animationContainer}>
             <LottieView
               source={getWeatherAnimation(day.condition.text)}
@@ -71,7 +66,6 @@ const DetailsScreen = () => {
             <Text style={styles.infoText}>UV Index: {day.uv}</Text>
           </View>
 
-          {/* Astro Info Card */}
           <View style={styles.infoCard}>
             <Text style={styles.infoText}>Sunrise: {astro.sunrise}</Text>
             <Text style={styles.infoText}>Sunset: {astro.sunset}</Text>

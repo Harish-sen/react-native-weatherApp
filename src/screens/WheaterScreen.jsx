@@ -49,7 +49,6 @@ const WeatherScreen = () => {
         {status === 'loading' && <ActivityIndicator size="large" color="#fff" />}
         {error && <Text style={styles.errorText}>Error: {"Data not found"}</Text>}
 
-        {/* Show message when no city is searched yet */}
         {!weatherData && (
           <View style={styles.centerMessageContainer}>
             <Text style={styles.centerMessageText}>Search any city to see the weather details.</Text>
@@ -86,7 +85,7 @@ const WeatherScreen = () => {
             <SelectList
               setSelected={handleDaysChange}
               data={daysOptions}
-              defaultOption={{ key: '3', value: '3 Days' }} // Default selected value
+              defaultOption={{ key: '3', value: '3 Days' }}
               placeholder="Select Days"
               boxStyles={styles.selectBox}
               dropdownStyles={styles.dropdown}
